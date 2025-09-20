@@ -524,6 +524,11 @@ async def websocket_endpoint(websocket: WebSocket):
     finally:
         manager.disconnect(websocket)
 
+@app.get("/health")
+async def health():
+    """Health check endpoint for deployment services"""
+    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
 @app.get("/api/v1/health")
 async def health_check():
     """Health check endpoint"""
