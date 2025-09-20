@@ -85,10 +85,12 @@ export const removeMessageHandler = (handler) => {
   messageHandlers = messageHandlers.filter(h => h !== handler);
 };
 
-export default {
+const websocketService = {
   connect: connectWebSocket,
   disconnect: disconnectWebSocket,
   send: sendMessage,
   addHandler: addMessageHandler,
   removeHandler: removeMessageHandler
 };
+
+export default websocketService;

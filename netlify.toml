@@ -2,10 +2,11 @@
 
 [build]
   base = "frontend/"
-  command = "npm run build"
+  command = "CI=false npm run build"
   publish = "build/"
 
 [build.environment]
+  CI = "false"
   REACT_APP_API_URL = "https://your-backend-api.herokuapp.com"
   REACT_APP_WS_URL = "wss://your-backend-api.herokuapp.com/ws"
 

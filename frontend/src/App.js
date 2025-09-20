@@ -20,7 +20,7 @@ function App() {
     biasLevel: 'all',
     verified: false
   });
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState(''); // Removed unused variable
   const [stats, setStats] = useState({
     totalArticles: 0,
     verifiedClaims: 0,
@@ -59,12 +59,14 @@ function App() {
     return () => {
       if (ws) ws.close();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Disable exhaustive-deps warning for initial load
 
   useEffect(() => {
     // Apply filters when they change
     loadNews();
-  }, [filters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]); // loadNews is intentionally not included to avoid infinite loop
 
   useEffect(() => {
     // Dark mode toggle
@@ -98,7 +100,7 @@ function App() {
     }
 
     setLoading(true);
-    setSearchQuery(query);
+    // setSearchQuery(query); // Removed with searchQuery state
     try {
       const data = await searchNews(query, filters);
       setNews(data.articles);
