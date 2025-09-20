@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// Hardcoded backend URL for Render deployment
-const API_BASE_URL = 'https://news-intelligence-backend.onrender.com' || process.env.REACT_APP_API_URL || 'http://localhost:8000';
+// HARDCODED backend URLs - Change these based on your deployment
+// For local development: 'http://localhost:8000'
+// For production (Render): Replace with your actual Render URL
+const API_BASE_URL = 'http://localhost:8000';  // Change this to your Render URL when deployed
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,29 +12,11 @@ const api = axios.create({
   },
 });
 
-// Request interceptor for auth token
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Response interceptor for error handling
+// Simple error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      // Handle unauthorized access
-      localStorage.removeItem('auth_token');
-      window.location.href = '/login';
-    }
+    console.error('API Error:', error);
     return Promise.reject(error);
   }
 );

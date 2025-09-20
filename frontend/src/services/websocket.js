@@ -1,5 +1,7 @@
-// Hardcoded WebSocket URL for Render deployment
-const WS_URL = 'wss://news-intelligence-backend.onrender.com/ws' || process.env.REACT_APP_WS_URL || 'ws://localhost:8000/ws';
+// HARDCODED WebSocket URLs - Change these based on your deployment
+// For local development: 'ws://localhost:8000/ws'
+// For production (Render): Replace with your actual Render URL using wss://
+const WS_URL = 'ws://localhost:8000/ws';  // Change to wss://your-render-url.onrender.com/ws when deployed
 
 let ws = null;
 let reconnectTimeout = null;

@@ -20,8 +20,6 @@ import random
 
 # Load environment variables
 load_dotenv()
-# Also try to load from parent directory
-load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 # Configure logging
 logging.basicConfig(
@@ -30,12 +28,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Configuration
-# NewsAPI key - Get your free key from https://newsapi.org
-# If no key is provided, the app will use mock data
-NEWS_API_KEY = os.getenv("NEWS_API_KEY", "")  # Will use mock data if empty
+# Configuration - REAL NEWS API
+# Get your free key from https://newsapi.org/register
+# Using real NewsAPI key for live news data
+NEWS_API_KEY = "46b22d914f924ef086cf247254c0e5ab"  # Your NewsAPI key
 NEWS_API_URL = "https://newsapi.org/v2"
-USE_MOCK_DATA = not NEWS_API_KEY or NEWS_API_KEY == "demo_key"  # Use mock data by default
+# Set to False to use real NewsAPI data, True for mock data
+USE_MOCK_DATA = False  # Using REAL news data from NewsAPI
 
 # Global politics keywords and sources
 POLITICS_KEYWORDS = [
