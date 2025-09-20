@@ -56,7 +56,10 @@ htmlcov/
 .fusebox/
 .dynamodb/
 .tern-port
+
+# Netlify
 .netlify/
+frontend/.netlify/
 
 # Python
 __pycache__/
