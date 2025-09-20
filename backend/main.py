@@ -31,8 +31,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
-NEWS_API_KEY = os.getenv("NEWS_API_KEY", "")
+# NewsAPI key - Get your free key from https://newsapi.org
+# If no key is provided, the app will use mock data
+NEWS_API_KEY = os.getenv("NEWS_API_KEY", "")  # Will use mock data if empty
 NEWS_API_URL = "https://newsapi.org/v2"
+USE_MOCK_DATA = not NEWS_API_KEY or NEWS_API_KEY == "demo_key"  # Use mock data by default
 
 # Global politics keywords and sources
 POLITICS_KEYWORDS = [
@@ -130,9 +133,9 @@ app.add_middleware(
 
 # News fetching and processing
 async def fetch_news_from_api(query: str = None, sources: str = None) -> List[Dict]:
-    """Fetch news from NewsAPI"""
-    if not NEWS_API_KEY:
-        logger.warning("NEWS_API_KEY not set, returning mock data")
+    """Fetch news from NewsAPI or return mock data"""
+    if USE_MOCK_DATA:
+        logger.info("Using mock data for demonstration")
         return generate_mock_news()
     
     async with httpx.AsyncClient() as client:
